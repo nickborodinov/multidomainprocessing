@@ -146,7 +146,7 @@ class cross_corr_FFT_PCA:
         for n,i in enumerate(components):
             array2=array2=self.pca_components_[i]
             sf=sliding_function(self.image,function=local_descriptor,
-                             window_size=self.window_size,step=1)
+                             window_size=self.window_size,step=self.step)
             self.pca_maps[n]=np.real(sf.generate())[:,:,0]
             
 class wavelet_NMF:

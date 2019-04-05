@@ -148,10 +148,11 @@ class cross_corr_FFT_PCA:
             array2=array2=self.pca_components_[i]
             sf=sliding_function(self.image,function=local_descriptor,
                              window_size=self.window_size,step=self.step)
+            result=sf.generate()
             if n==0:
                 transformation_shape=sf.output_shape
                 self.pca_maps=np.zeros([len(components),transformation_shape[0],transformation_shape[1]])
-            self.pca_maps[n]=np.real(sf.generate())[:,:,0]
+            self.pca_maps[n]=np.real(result)[:,:,0]
             
 class wavelet_NMF:
     def __init__(self,image,n_components=3,rotation_number=10,wavelet_level=1,display=False):

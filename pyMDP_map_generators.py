@@ -151,7 +151,7 @@ class cross_corr_FFT_PCA:
             result=sf.generate()
             if n==0:
                 transformation_shape=sf.output_shape
-                self.pca_maps=np.zeros([len(components),transformation_shape[0],transformation_shape[1]])
+                self.pca_maps=np.zeros([len(components),result.shape[0],result.shape[1]])
             self.pca_maps[n]=np.real(result)[:,:,0]
             
 class wavelet_NMF:

@@ -117,13 +117,13 @@ class light_Radon_PCA:
         self.pca_maps=np.swapaxes(aux2,1,2)
         
 class cross_corr_FFT_PCA:
-    def __init__(self,image,n_components=50,window_size=20,step=5,step_cc=3,display=False):
+    def __init__(self,image,n_components=50,window_size=20,step=3,step_pre=3,display=False):
         self.n_components=n_components
         self.window_size=window_size
         self.step=step
-        self.step_cc=step_cc
+        self.step_pre=step_pre
         self.image=image
-        preprocess=full_FFT_PCA(image,n_components=n_components,window_size=window_size,step=step)
+        preprocess=full_FFT_PCA(image,n_components=n_components,window_size=window_size,step=step_pre)
         preprocess.fit()
         if display:
             for i in range(n_components):
@@ -147,7 +147,7 @@ class cross_corr_FFT_PCA:
         for n,i in enumerate(components):
             array2=array2=self.pca_components_[i]
             sf=sliding_function(self.image,function=local_descriptor,
-                             window_size=self.window_size,step=self.step_cc)
+                             window_size=self.window_size,step=self.step)
             if n==0:
                 transformation_shape=sf.output_shape
                 self.pca_maps=np.zeros([len(components),transformation_shape[0],transformation_shape[1]])

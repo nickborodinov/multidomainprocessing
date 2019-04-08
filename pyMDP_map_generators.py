@@ -136,7 +136,8 @@ class cross_corr_FFT_PCA:
                 ax[0].set_yticks([])
                 ax[1].set_yticks([])
                 plt.show()
-        self.pca_components_=preprocess.pca_components_
+        self.pca_components_=np.copy(preprocess.pca_components_)
+        preprocess='None'
         
     def fit(self,components=[1,2,3]):
         
@@ -153,6 +154,7 @@ class cross_corr_FFT_PCA:
                 transformation_shape=sf.output_shape
                 self.pca_maps=np.zeros([len(components),result.shape[0],result.shape[1]])
             self.pca_maps[n]=np.real(result)[:,:,0]
+            sf='None'
             
 class wavelet_NMF:
     def __init__(self,image,n_components=3,rotation_number=10,wavelet_level=1,display=False):
